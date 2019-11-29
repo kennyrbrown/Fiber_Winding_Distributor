@@ -9,7 +9,7 @@
  Motor/Guide/Carriage: Upcycled from Epson Expression XP-440 Printer
  Controller: Arduino Uno R3
  Motor Driver: Adafruit DRV8871
- Limit Switches: 
+ Limit Switches: Pololu 1405
 
 ** NOTE: MOTOR_IN1, LOW = Forward, MOTOR_IN2, LOW = Backward
 */
@@ -37,7 +37,6 @@ int potValue = 0;     // Variable for trim pot value
 
 void setup() {
   Serial.begin(9600);
-
   pinMode(buttonPin, INPUT);
   pinMode(limitSwitch1, INPUT);
   pinMode(potPin, INPUT);
@@ -45,14 +44,18 @@ void setup() {
   pinMode(MOTOR_IN2, OUTPUT);
 }
 
+/*  ---------------------------------------------------------------------------
+ *   READ IN 
+ *  ---------------------------------------------------------------------------
+ */
 void loop() {
-  
   potValue = map(analogRead(potPin),0,1023,0,255);
   Serial.println(potValue);
   button = digitalRead(buttonPin);
   limit1 = digitalRead(limitSwitch1);
   limit2 = digitalRead(limitSwitch2);
   Serial.println(dir);
+ 
 /*  ---------------------------------------------------------------------------
  *   ON/OFF BUTTON
  *  ---------------------------------------------------------------------------
